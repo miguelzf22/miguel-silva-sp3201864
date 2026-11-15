@@ -38,7 +38,8 @@ def logout():
 
 @bp.post('/theme')
 def theme():
-    session['theme']='tropical' if request.form.get('theme')=='tropical' else 'aurora'
+    selected=request.form.get('theme')
+    session['theme']=selected if selected in {'aurora','tropical','playroom'} else 'aurora'
     return redirect(url_for('reports.dashboard') if g.user else url_for('auth.login'))
 
 @bp.route('/account',methods=['GET','POST'])
